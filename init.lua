@@ -453,6 +453,14 @@ require('lazy').setup({
       end, { desc = '[S]earch [N]eovim files' })
 
       require 'custom.telescope_keymaps'
+
+      vim.keymap.set('n', '<leader>on', '<cmd>lua require("custom.notes").open_notes_sidebar()<CR>', { noremap = true, silent = true, desc = '[O]pen [N]otes' })
+      vim.api.nvim_set_keymap(
+        'n',
+        '<leader>obn',
+        '<cmd>lua require("custom.notes").open_or_create_branch_note()<CR>',
+        { noremap = true, silent = true, desc = '[O]pen [B]ranch [N]otes' }
+      )
     end,
   },
 
