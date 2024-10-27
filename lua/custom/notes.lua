@@ -47,7 +47,7 @@ local function open_or_create_branch_note()
 
   vim.cmd 'vsplit'
   vim.cmd 'wincmd L'
-  vim.cmd 'vertical resize 30'
+  vim.cmd 'vertical resize 45'
 
   local file = io.open(note_path, 'r')
   if file then
@@ -75,7 +75,7 @@ local function open_notes_sidebar()
 
   vim.cmd 'vsplit'
   vim.cmd 'wincmd L'
-  vim.cmd 'vertical resize 30'
+  vim.cmd 'vertical resize 45'
 
   vim.cmd('Explore ' .. target_dir)
 end
