@@ -9,7 +9,7 @@ local function get_note_name()
 
   local branch_name = handle:read '*l'
   handle:close()
-  return branch_name or 'notes'
+  return branch_name:gsub('/', '_') or 'notes'
 end
 
 local function get_current_directory_name()
