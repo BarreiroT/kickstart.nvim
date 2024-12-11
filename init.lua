@@ -453,6 +453,7 @@ require('lazy').setup({
       end, { desc = '[S]earch [N]eovim files' })
 
       require 'custom.telescope_keymaps'
+      require 'custom.keymaps'
 
       vim.keymap.set('n', '<leader>on', '<cmd>lua require("custom.notes").open_notes_sidebar()<CR>', { noremap = true, silent = true, desc = '[O]pen [N]otes' })
       vim.api.nvim_set_keymap(
