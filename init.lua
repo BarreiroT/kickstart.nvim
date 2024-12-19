@@ -768,7 +768,9 @@ require('lazy').setup({
         -- You can use 'stop_after_first' to run the first available formatter from the list
         html = { 'prettierd', 'prettier', 'eslint', stop_after_first = true },
         javascript = { 'prettierd', 'prettier', 'eslint', stop_after_first = true },
+        javascriptreact = { 'prettierd', 'prettier', 'eslint', stop_after_first = true },
         typescript = { 'prettierd', 'prettier', 'eslint', stop_after_first = true },
+        typescriptreact = { 'prettierd', 'prettier', 'eslint', stop_after_first = true },
       },
     },
   },
