@@ -6,6 +6,10 @@ return {
     view_options = {
       show_hidden = true,
     },
+    keymaps = {
+      ['<C-c>'] = false,
+      ['<C-q>'] = { 'actions.close', mode = 'n' },
+    },
   },
   -- Optional dependencies
   dependencies = { { 'echasnovski/mini.icons', opts = {} } },
