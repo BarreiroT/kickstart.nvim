@@ -766,13 +766,21 @@ require('lazy').setup({
         python = { 'isort', 'black' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        html = { 'prettierd', 'eslint' },
-        javascript = { 'prettierd', 'eslint' },
-        javascriptreact = { 'prettierd', 'eslint' },
-        typescript = { 'prettierd', 'eslint' },
-        typescriptreact = { 'prettierd', 'eslint' },
+        html = { 'prettierd' },
+        javascript = { 'prettierd' },
+        javascriptreact = { 'prettierd' },
+        typescript = { 'prettierd' },
+        typescriptreact = { 'prettierd' },
       },
     },
+    config = function()
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        pattern = '*',
+        callback = function(args)
+          require('conform').format { bufnr = args.buf, lsp_format = 'fallback' }
+        end,
+      })
+    end,
   },
 
   { -- Autocompletion
