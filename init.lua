@@ -743,10 +743,31 @@ require('lazy').setup({
         mode = '',
         desc = '[F]ormat buffer',
       },
+      {
+        '<leader>tf',
+        function()
+          vim.notify(vim.b.disable_autoformat and 'Enabled autoformat for current buffer' or 'Disabled autoformat for current buffer')
+          vim.cmd(vim.b.disable_autoformat and 'FormatEnable' or 'FormatDisable!')
+        end,
+        mode = '',
+        desc = '[T]oggle buffer auto[F]ormat',
+      },
+      {
+        '<leader>tF',
+        function()
+          vim.notify(vim.g.disable_autoformat and 'Enabled autoformat globally' or 'Disabled autoformat globally')
+          vim.cmd(vim.g.disable_autoformat and 'FormatEnable' or 'FormatDisable')
+        end,
+        mode = '',
+        desc = '[T]oggle global auto[F]ormat',
+      },
     },
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
+        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+          return
+        end
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
@@ -773,6 +794,30 @@ require('lazy').setup({
         typescriptreact = { 'prettier' },
       },
     },
+    config = function(_, opts)
+      -- https://github.com/stevearc/conform.nvim/issues/192#issuecomment-2573170631
+      require('conform').setup(opts)
+
+      vim.api.nvim_create_user_command('FormatDisable', function(args)
+        if args.bang then
+          -- :FormatDisable! disables autoformat for this buffer only
+          vim.b.disable_autoformat = true
+        else
+          -- :FormatDisable disables autoformat globally
+          vim.g.disable_autoformat = true
+        end
+      end, {
+        desc = 'Disable autoformat-on-save',
+        bang = true, -- allows the ! variant
+      })
+
+      vim.api.nvim_create_user_command('FormatEnable', function()
+        vim.b.disable_autoformat = false
+        vim.g.disable_autoformat = false
+      end, {
+        desc = 'Re-enable autoformat-on-save',
+      })
+    end,
   },
 
   { -- Autocompletion
